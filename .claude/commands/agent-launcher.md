@@ -131,9 +131,10 @@ Ask the user to pick a number, `c`, or `q`.
 - Embody `bootstrap` (read `<mic_path>/agents/bootstrap/M.json|I.json|C.json`).
 - Greet briefly: "Let's create your new M.I.C. agent. I'll ask 11 questions in three phases: M, C, I."
 - Run the flow per `<mic_path>/questions.json` - one question at a time, in phase order **M → C → I**, confirming each phase before moving on.
-- At the end, write:
+- At the end, write three things:
   - The three agent files to `<mic_path>/agents/<new-agent-name>/M.json`, `I.json`, `C.json` (use the Write tool).
   - A per-agent slash command at `$HOME/.claude/commands/<new-agent-name-lowercased>.md` (resolved to absolute Windows path before using the Write tool). Use `lavey.md` in this repo as the template.
+  - A terminal wrapper script at `<mic_path>/bin/mic-<new-agent-name-lowercased>.cmd` so the user can also launch the agent from PowerShell/cmd with `mic-<name>`. Use `<mic_path>/bin/mic-lavey.cmd` as the template.
 
 **Picked `q`:**
 

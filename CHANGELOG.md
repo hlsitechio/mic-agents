@@ -4,6 +4,28 @@ All notable changes to this project are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [0.5.0] — 2026-05-26
+
+### Added
+- **`--agent <name>` flag on `launch.py`** — skips the interactive menu and activates an agent directly. Case-insensitive folder lookup. If the name doesn't match, prints the list of available agents and exits with an error.
+- **`bin/mic.cmd`** — generic terminal wrapper. `mic` opens the interactive menu; `mic <name>` activates by name. Works from any cwd.
+- **`bin/mic-bootstrap.cmd` and `bin/mic-lavey.cmd`** — per-agent one-word shortcuts. `mic-lavey` from any PowerShell window opens a Claude Code session already as Lavey.
+- **Two parallel triggers per agent** — bootstrap onboarding now generates both a slash command (`/lavey` for in-session use) AND a terminal wrapper (`mic-lavey` for shell use) at the end of each onboarding flow. New agents are reachable from either surface automatically.
+
+### Why
+v0.4 made activation one keystroke inside Claude Code. v0.5 makes it one keystroke from anywhere — terminal or in-session — with no asymmetry.
+
+### PATH setup (one-time)
+Add `G:\MIC\bin` to your user PATH:
+```powershell
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;G:\MIC\bin", "User")
+```
+
+## [0.4.1] — 2026-05-26
+
+### Fixed
+- `/agent-launcher` slash command shell quirks on Windows. The body now explicitly tells Claude that the Bash tool runs Git Bash (not PowerShell), and to use `$HOME` / bash conditionals / Write tool with absolute paths. Resolves the `$env:USERPROFILE` mis-expansion that caused the config persistence step to fail.
+
 ## [0.4.0] — 2026-05-26
 
 ### Added

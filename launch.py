@@ -4,14 +4,17 @@ M.I.C. Launcher - pick an agent and start a Claude Code session with that
 agent's M + I + C profile loaded into the system prompt.
 
 Usage:
-    python launch.py                    # scan ./agents/
-    python launch.py /path/to/agents    # scan a custom folder
+    python launch.py                              # interactive menu, scan ./agents/
+    python launch.py /path/to/agents              # interactive menu, custom folder
+    python launch.py --agent lavey                # direct activate, skip menu
+    python launch.py /custom --agent lavey        # direct activate from custom folder
 
 An agent folder must contain three files: M.json, I.json, C.json.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import subprocess
@@ -43,7 +46,20 @@ def discover_agents(agents_dir: Path) -> list[tuple[Path, dict, dict, dict]]:
     return agents
 
 
-def show_menu(agents: list[tuple[Path, dict, dict, dict]]) -> tuple[Path, dict, dict, dict]:
+def find_agent_by_name(
+    agents: list[tuple[Path, dict, dict, dict]], name: str
+) -> tuple[Path, dict, dict, dict] | None:
+    """Case-insensitive lookup by folder name."""
+    name_lower = name.lower()
+    for agent in agents:
+        if agent[0].name.lower() == name_lower:
+            return agent
+    return None
+
+
+def show_menu(
+    agents: list[tuple[Path, dict, dict, dict]],
+) -> tuple[Path, dict, dict, dict]:
     print()
     print(f"M.I.C. - found {len(agents)} agent(s):")
     print()
@@ -108,13 +124,51 @@ def launch_claude(system_prompt: str) -> None:
 
 
 def main() -> None:
-    agents_dir = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("./agents")
+    parser = argparse.ArgumentParser(
+        description="M.I.C. Launcher - pick an agent and start a Claude Code session with that agent's M + I + C profile loaded.",
+        epilog=(
+            "Examples:\n"
+            "  python launch.py\n"
+            "  python launch.py G:\\MIC\\agents\n"
+            "  python launch.py --agent lavey\n"
+            "  python launch.py G:\\MIC\\agents --agent lavey"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "agents_dir",
+        nargs="?",
+        default="./agents",
+        help="Folder to scan for agent profiles (default: ./agents/).",
+    )
+    parser.add_argument(
+        "--agent",
+        metavar="NAME",
+        help="Skip the menu and activate this agent directly (case-insensitive folder name).",
+    )
+    args = parser.parse_args()
+
+    agents_dir = Path(args.agents_dir)
     agents = discover_agents(agents_dir)
     if not agents:
         print(f"No valid M.I.C. agents found in {agents_dir}.")
         print("Each agent folder must contain M.json, I.json, and C.json.")
         sys.exit(1)
-    chosen = show_menu(agents)
+
+    if args.agent:
+        chosen = find_agent_by_name(agents, args.agent)
+        if chosen is None:
+            print(
+                f"Error: agent '{args.agent}' not found in {agents_dir}.",
+                file=sys.stderr,
+            )
+            print("Available agents:", file=sys.stderr)
+            for folder, _m, _i, _c in agents:
+                print(f"  - {folder.name}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        chosen = show_menu(agents)
+
     prompt = build_prompt(*chosen)
     launch_claude(prompt)
 
