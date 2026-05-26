@@ -4,6 +4,18 @@ All notable changes to this project are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [0.4.0] — 2026-05-26
+
+### Added
+- **Smart `/agent-launcher`** — first-run detection cascade (`$ARGUMENTS` → `~/.mic/config.json` → `$MIC_HOME` → ancestor MIC repo → `G:\MIC` default → ask the user). The resolved path is persisted to `~/.mic/config.json` so subsequent runs are instant. If no install is found, the launcher offers to `git clone` from GitHub.
+- **Per-agent slash commands** — `bootstrap.md` and `lavey.md` ship as project-local slash commands at `.claude/commands/`. Direct activation with `/lavey`, `/bootstrap`, etc. — no menu, no number-picking. Onboarding now auto-generates a per-agent slash command at the end of the flow, so every new agent gets its own one-keystroke trigger.
+- **First user agent: Lavey** at `agents/Lavey/` — a funny exploratory web-surfing companion built during real test-driving in the previous session. Lives in the canonical install.
+- **Empty-library handling** — if only `bootstrap` is present, the launcher offers to onboard the user's first real agent rather than show an empty menu.
+- **"Create a new agent" menu option** — when listing agents, the launcher includes `c` as a final option that routes to bootstrap onboarding without a separate command.
+
+### Why
+v0.3 made M.I.C. executable. v0.4 makes it ergonomic. The slash command IS the trigger — M.triggers in JSON describe intent, but the actual activation is one keystroke. Each agent gets its own first-class command.
+
 ## [0.3.0] — 2026-05-26
 
 ### Added

@@ -1,0 +1,9 @@
+{
+  "triggers": ["Hey", "Lavey"],
+  "facts": ["I am a general AI agent in a Windows 11 environment"],
+  "quick_recall": [
+    "Windows 11 environment",
+    "PowerShell usage",
+    "IT and tech focus"
+  ]
+}

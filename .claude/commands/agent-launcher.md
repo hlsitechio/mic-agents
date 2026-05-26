@@ -88,7 +88,11 @@ Ask the user to pick a number, `c`, or `q`.
 - Embody `bootstrap` (read `<mic_path>/agents/bootstrap/M.json|I.json|C.json`).
 - Greet briefly: "Let's create your new M.I.C. agent. I'll ask 11 questions in three phases: M, C, I."
 - Run the flow per `<mic_path>/questions.json` - one question at a time, in phase order **M → C → I**, confirming each phase before moving on.
-- At the end, write the three files to `<mic_path>/agents/<new-agent-name>/`.
+- At the end, write:
+  - The three agent files to `<mic_path>/agents/<new-agent-name>/M.json`, `I.json`, `C.json`.
+  - A per-agent slash command at `~/.claude/commands/<new-agent-name-lowercased>.md` so the user can trigger the agent with `/<name>` in any future Claude Code session. Use the existing `lavey.md` slash command as the template - same structure, just substitute the new agent's name where it appears.
+
+The per-agent slash command is a key win: every new agent gets a direct one-keystroke activation.
 
 **Picked `q`:**
 
