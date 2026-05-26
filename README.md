@@ -51,10 +51,13 @@ Separate files make each layer hot-swappable. Static layers stay put; the dynami
 AGENTS.md                # if you are an AI agent, read this first
 CHANGELOG.md             # release notes
 LICENSE                  # MIT
+install.py               # one-shot installer — adds bin/ to PATH, writes ~/.mic/config.json
+install.cmd              # Windows one-click wrapper for install.py
+install.sh               # macOS / Linux wrapper for install.py
 launch.py                # M.I.C. runtime — pick an agent, spawn a Claude Code session as it
 questions.json           # the 11-question onboarding flow — entry point
 
-bin/                     # terminal one-keystroke launchers (add to PATH)
+bin/                     # terminal one-keystroke launchers (installer adds this to PATH)
   mic.cmd                # mic [name] — generic wrapper
   mic-bootstrap.cmd      # mic-bootstrap — direct activation of the onboarder
   mic-lavey.cmd          # mic-lavey — direct activation of Lavey
@@ -93,6 +96,19 @@ skill/
 3. Get back three valid files: `M.json`, `I.json`, `C.json`.
 4. Drop them into `agents/<your-agent>/`.
 
+## Install (one-time, after cloning)
+
+**Windows:** double-click `install.cmd` (or run it from any terminal).
+**macOS / Linux:** `bash install.sh`.
+
+The installer adds `bin/` to your user PATH and writes `~/.mic/config.json` so every trigger works immediately. Idempotent — safe to re-run. Open a **new** terminal after install for the PATH change to take effect.
+
+Manual alternative (PowerShell, user scope) if you'd rather not run the installer:
+
+```powershell
+[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;G:\MIC\bin", "User")
+```
+
 ## Run an agent
 
 Once you have one or more agent profiles in `agents/`, launch one with:
@@ -130,14 +146,7 @@ The slash command is the trigger. `M.triggers` in JSON describes intent — `/<n
 
 ### One-keystroke from any terminal
 
-Add `G:\MIC\bin` to your user PATH and you get terminal triggers symmetric to the slash commands:
-
-```powershell
-# One-time PATH setup (PowerShell, user scope):
-[Environment]::SetEnvironmentVariable("PATH", "$env:PATH;G:\MIC\bin", "User")
-```
-
-Then from any new PowerShell or cmd window:
+Once the installer has added `bin/` to your PATH, terminal triggers mirror the slash commands. From any new PowerShell or cmd window:
 
 ```
 mic                      # interactive menu

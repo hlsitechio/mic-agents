@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [0.6.0] — 2026-05-26
+
+### Added
+- **`install.py`** — one-shot installer. Adds `bin/` to the user PATH (Windows: HKCU\\Environment via `winreg`; macOS/Linux: appends `export PATH=...` to `~/.bashrc` or `~/.zshrc`) and writes `~/.mic/config.json` so `/agent-launcher` knows the install location without prompting. Idempotent — re-runs are safe and skip already-applied changes.
+- **`install.cmd`** — Windows one-click wrapper. Double-click or run from any terminal.
+- **`install.sh`** — macOS / Linux equivalent.
+
+### Why
+v0.5 made terminal activation possible but required manual PATH setup. v0.6 removes that friction — one click and every trigger (terminal + slash command) is wired up. No copy-pasting environment commands.
+
 ## [0.5.0] — 2026-05-26
 
 ### Added
