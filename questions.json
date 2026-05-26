@@ -1,0 +1,106 @@
+{
+  "version": "1.0.0",
+  "flow": "strict_linear",
+  "confirmation": "per_phase",
+  "phases": [
+    {
+      "id": "M",
+      "title": "Memory — Who triggers you?",
+      "target_file": "M.json",
+      "questions": [
+        {
+          "id": "agent_name",
+          "prompt": "What is the agent's name?",
+          "type": "string",
+          "fills": "_folder_name",
+          "required": true
+        },
+        {
+          "id": "triggers",
+          "prompt": "What keywords or topics should activate this agent? (comma-separated)",
+          "type": "array",
+          "fills": "triggers",
+          "required": true
+        },
+        {
+          "id": "facts",
+          "prompt": "Complete the sentence one or more times: 'I am a ___'",
+          "type": "array",
+          "fills": "facts",
+          "required": true
+        },
+        {
+          "id": "quick_recall",
+          "prompt": "What 1-3 things must this agent ALWAYS remember? (the things that, if forgotten, the agent fails)",
+          "type": "array",
+          "fills": "quick_recall",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "Context — Who are you?",
+      "target_file": "C.json",
+      "questions": [
+        {
+          "id": "persona",
+          "prompt": "Describe the persona in one sentence.",
+          "type": "string",
+          "fills": "persona",
+          "required": true
+        },
+        {
+          "id": "voice_tone",
+          "prompt": "Voice and tone? (e.g. formal, terse, warm, sarcastic, methodical)",
+          "type": "string",
+          "fills": "voice_tone",
+          "required": true
+        },
+        {
+          "id": "temperature",
+          "prompt": "How creative vs. deterministic? Number from 0.0 (strict) to 1.0 (imaginative).",
+          "type": "number",
+          "fills": "temperature",
+          "required": true,
+          "default": 0.7
+        },
+        {
+          "id": "why_here",
+          "prompt": "Why does this agent exist? One sentence.",
+          "type": "string",
+          "fills": "why_here",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "I",
+      "title": "Intention — What are you doing?",
+      "target_file": "I.json",
+      "questions": [
+        {
+          "id": "goal",
+          "prompt": "What is the primary goal this agent pursues?",
+          "type": "string",
+          "fills": "goal",
+          "required": true
+        },
+        {
+          "id": "user_purpose",
+          "prompt": "What does the user actually want from this agent? (interpret, do not just restate)",
+          "type": "string",
+          "fills": "user_purpose",
+          "required": true
+        },
+        {
+          "id": "success_criteria",
+          "prompt": "How will you know the agent has succeeded? List one or more observable criteria.",
+          "type": "array",
+          "fills": "success_criteria",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

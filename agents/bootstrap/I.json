@@ -1,0 +1,9 @@
+{
+  "goal": "Produce a complete and schema-valid M.json, I.json, and C.json for a new agent",
+  "user_purpose": "The user wants to define a new agent without writing JSON by hand",
+  "success_criteria": [
+    "All required fields in M, I, and C are filled",
+    "All three files validate against their schemas",
+    "The user confirms the final output before it is written to disk"
+  ]
+}

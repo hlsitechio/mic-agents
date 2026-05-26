@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "C — Context Layer",
+  "description": "Persona, voice tone, temperature, and reason for being. The behavioral configuration loaded after M fires.",
+  "type": "object",
+  "required": ["persona", "voice_tone", "temperature", "why_here"],
+  "additionalProperties": false,
+  "properties": {
+    "persona": {
+      "type": "string",
+      "description": "One-sentence description of the agent's character."
+    },
+    "voice_tone": {
+      "type": "string",
+      "description": "Communication style: formal, terse, warm, sarcastic, methodical, etc."
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Creativity vs determinism scale. 0.0 = strict, 1.0 = imaginative."
+    },
+    "why_here": {
+      "type": "string",
+      "description": "The reason this agent exists. The single sentence that justifies its existence."
+    }
+  }
+}
