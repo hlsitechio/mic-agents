@@ -1,6 +1,8 @@
 # M.I.C.
 
-A three-layer agent profile format.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+A three-layer agent profile format. Open source. Fully transparent. Built to be remodeled.
 
 - **M** — Memory: triggers and facts that *activate* an agent
 - **I** — Intention: what the agent is doing *right now*
@@ -23,6 +25,7 @@ Separate files make each layer hot-swappable.
 ## Repo layout
 
 ```
+LICENSE                  # MIT
 questions.json           # the 11-question onboarding flow — entry point
 
 schema/                  # JSON Schemas — every M/I/C validates against these
@@ -35,6 +38,9 @@ agents/
     M.json
     I.json
     C.json
+
+skill/
+  SKILL.md               # installable skill — any compatible AI agent can run M.I.C.
 ```
 
 `questions.json` lives at the root on purpose — it's the entry point, isolated from the layers it builds.
@@ -46,6 +52,16 @@ agents/
 3. Get back three valid files: `M.json`, `I.json`, `C.json`.
 4. Drop them into `agents/<your-agent>/`.
 
+## Install as a skill
+
+`skill/SKILL.md` packages M.I.C. as a Claude / Anthropic-style skill. Any AI agent that supports the skill format can read it and walk a user through generating their own `M.json`, `I.json`, `C.json` — no extra setup.
+
+The skill describes itself in M.I.C. terms: its description is the **M**, its instructions are the **C**, its goal is the **I**. The system is self-describing.
+
 ## The bootstrap agent
 
 `agents/bootstrap/` defines the onboarding agent itself in M.I.C. format. The system describes itself. Read its three files to see a complete, working profile.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Fork it, ship it, build on it. Attribution appreciated, not required.
