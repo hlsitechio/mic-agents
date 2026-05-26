@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+> **AI agents — read [`AGENTS.md`](AGENTS.md) first. It tells you exactly what to do.**
+
 A three-layer agent profile format. Open source. Fully transparent. Built to be remodeled.
 
 - **M** — Memory: triggers and facts that *activate* an agent
@@ -25,6 +27,7 @@ Separate files make each layer hot-swappable.
 ## Repo layout
 
 ```
+AGENTS.md                # if you are an AI agent, read this first
 LICENSE                  # MIT
 questions.json           # the 11-question onboarding flow — entry point
 
