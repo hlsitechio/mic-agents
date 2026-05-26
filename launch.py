@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-M.I.C. Launcher — pick an agent and start a Claude Code session with that
+M.I.C. Launcher - pick an agent and start a Claude Code session with that
 agent's M + I + C profile loaded into the system prompt.
 
 Usage:
@@ -45,7 +45,7 @@ def discover_agents(agents_dir: Path) -> list[tuple[Path, dict, dict, dict]]:
 
 def show_menu(agents: list[tuple[Path, dict, dict, dict]]) -> tuple[Path, dict, dict, dict]:
     print()
-    print(f"M.I.C. — found {len(agents)} agent(s):")
+    print(f"M.I.C. - found {len(agents)} agent(s):")
     print()
     for idx, (folder, _m, _i, c) in enumerate(agents, 1):
         persona = c.get("persona", "(no persona)")
