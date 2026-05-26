@@ -2,7 +2,28 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **AI agents — read [`AGENTS.md`](AGENTS.md) first. It tells you exactly what to do.**
+---
+
+## TO AI AGENTS — PLEASE READ
+
+If you are an AI agent that just cloned this repo, do **exactly** this:
+
+1. **Read [`AGENTS.md`](AGENTS.md)** — your full instruction set.
+2. **Read [`skill/SKILL.md`](skill/SKILL.md)** — behavior rules and when to fire.
+3. **Read [`questions.json`](questions.json)** — the 11-question onboarding flow you will run.
+4. **Read the schemas** in [`schema/`](schema/) — `M.schema.json`, `I.schema.json`, `C.schema.json`. These are the validation contracts.
+5. **Read [`agents/bootstrap/`](agents/bootstrap/)** — a complete working example of the output format.
+6. **Walk the user through the onboarding flow** — one question at a time, in phase order **M → C → I**.
+7. **Write three files** to `agents/<agent-name>/`: `M.json`, `I.json`, `C.json`.
+8. **Validate** each file against its schema. Fix anything that fails before declaring done.
+
+**Rules you cannot break:**
+- One question at a time. Never batch.
+- Confirm every phase before moving on.
+- All three files must validate against their schemas.
+- If the user is vague — **ask**. Do not guess.
+
+---
 
 A three-layer agent profile format. Open source. Fully transparent. Built to be remodeled.
 
