@@ -49,7 +49,9 @@ Separate files make each layer hot-swappable. Static layers stay put; the dynami
 
 ```
 AGENTS.md                # if you are an AI agent, read this first
+CHANGELOG.md             # release notes
 LICENSE                  # MIT
+launch.py                # M.I.C. runtime — pick an agent, spawn a Claude Code session as it
 questions.json           # the 11-question onboarding flow — entry point
 
 schema/                  # JSON Schemas — every M/I/C validates against these
@@ -65,6 +67,10 @@ agents/
 
 skill/
   SKILL.md               # installable skill — any compatible AI agent can run M.I.C.
+
+.claude/
+  commands/
+    agent-launcher.md    # /agent-launcher slash command — calls launch.py from inside Claude Code
 ```
 
 `questions.json` lives at the root on purpose — it's the entry point, isolated from the layers it builds.
@@ -75,6 +81,30 @@ skill/
 2. Run the onboarding flow (`questions.json`) — answer 11 questions.
 3. Get back three valid files: `M.json`, `I.json`, `C.json`.
 4. Drop them into `agents/<your-agent>/`.
+
+## Run an agent
+
+Once you have one or more agent profiles in `agents/`, launch one with:
+
+```bash
+python launch.py
+```
+
+The launcher will list every valid agent in `./agents/`, prompt you to pick one by number, and spawn a Claude Code session with that agent's M + I + C injected into the system prompt. The agent's M-layer triggers (`triggers[]`) become its activation keys for that session.
+
+Point it at a different folder:
+
+```bash
+python launch.py /path/to/another/agents
+```
+
+From inside an existing Claude Code session in this repo, the same flow is available as a slash command:
+
+```
+/agent-launcher
+```
+
+**Requires:** Python 3.9+ and the `claude` CLI (Claude Code) on PATH.
 
 ## Install as a skill
 

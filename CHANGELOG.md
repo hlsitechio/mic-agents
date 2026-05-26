@@ -4,6 +4,15 @@ All notable changes to this project are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/). Versioning follows [SemVer](https://semver.org/).
 
+## [0.3.0] — 2026-05-26
+
+### Added
+- **`launch.py`** at the repo root — the first M.I.C. *runtime*. Scans `./agents/` (or a custom path) for valid agent profiles, presents a numbered menu, and launches Claude Code with the chosen agent's M + I + C injected via `--append-system-prompt`. Cross-platform Python, stdlib only.
+- **`/agent-launcher` slash command** in `.claude/commands/` — invokes `launch.py` from inside any Claude Code session opened in the repo.
+
+### Why
+M.I.C. was a *format* before this release. With a launcher, it is a *system* — agents become executable. The M-layer triggers, which were always meant to be activation keys, finally have a listener.
+
 ## [0.2.0] — 2026-05-26
 
 ### Changed (breaking)
