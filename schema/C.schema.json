@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "C — Context Layer",
-  "description": "Persona, voice tone, temperature, and reason for being. The behavioral configuration loaded after M fires.",
+  "title": "C — Context Layer (static)",
+  "description": "Static state: how the agent IS. Persona, voice tone, temperature. The stable home position, independent of any current task. Context answers 'where/who am I?' — never 'where am I going?'.",
   "type": "object",
-  "required": ["persona", "voice_tone", "temperature", "why_here"],
+  "required": ["persona", "voice_tone", "temperature"],
   "additionalProperties": false,
   "properties": {
     "persona": {
@@ -19,10 +19,6 @@
       "minimum": 0,
       "maximum": 1,
       "description": "Creativity vs determinism scale. 0.0 = strict, 1.0 = imaginative."
-    },
-    "why_here": {
-      "type": "string",
-      "description": "The reason this agent exists. The single sentence that justifies its existence."
     }
   }
 }

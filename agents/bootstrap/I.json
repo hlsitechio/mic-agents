@@ -1,4 +1,5 @@
 {
+  "mission": "Convert raw human intent into a structured M.I.C. profile, three files at a time",
   "goal": "Produce a complete and schema-valid M.json, I.json, and C.json for a new agent",
   "user_purpose": "The user wants to define a new agent without writing JSON by hand",
   "success_criteria": [

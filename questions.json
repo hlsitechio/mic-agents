@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0",
+  "version": "0.2.0",
   "flow": "strict_linear",
   "confirmation": "per_phase",
   "phases": [
     {
       "id": "M",
-      "title": "Memory — Who triggers you?",
+      "title": "Memory — Who triggers you? (static)",
       "target_file": "M.json",
       "questions": [
         {
@@ -40,7 +40,7 @@
     },
     {
       "id": "C",
-      "title": "Context — Who are you?",
+      "title": "Context — Who are you? (static)",
       "target_file": "C.json",
       "questions": [
         {
@@ -64,38 +64,38 @@
           "fills": "temperature",
           "required": true,
           "default": 0.7
-        },
-        {
-          "id": "why_here",
-          "prompt": "Why does this agent exist? One sentence.",
-          "type": "string",
-          "fills": "why_here",
-          "required": true
         }
       ]
     },
     {
       "id": "I",
-      "title": "Intention — What are you doing?",
+      "title": "Intention — Where are you going? (dynamic)",
       "target_file": "I.json",
       "questions": [
         {
+          "id": "mission",
+          "prompt": "What is this agent's long-arc mission? The stable reason it exists, across all sessions. (Rarely changes.)",
+          "type": "string",
+          "fills": "mission",
+          "required": true
+        },
+        {
           "id": "goal",
-          "prompt": "What is the primary goal this agent pursues?",
+          "prompt": "What is the primary goal for THIS session? (Rewritten per task.)",
           "type": "string",
           "fills": "goal",
           "required": true
         },
         {
           "id": "user_purpose",
-          "prompt": "What does the user actually want from this agent? (interpret, do not just restate)",
+          "prompt": "What does the user actually want from this agent right now? (Interpret, do not just restate.)",
           "type": "string",
           "fills": "user_purpose",
           "required": true
         },
         {
           "id": "success_criteria",
-          "prompt": "How will you know the agent has succeeded? List one or more observable criteria.",
+          "prompt": "How will you know the current goal has been met? List one or more observable criteria.",
           "type": "array",
           "fills": "success_criteria",
           "required": true

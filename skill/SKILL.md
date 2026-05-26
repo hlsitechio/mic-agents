@@ -9,11 +9,15 @@ A three-layer JSON profile format for AI agents. This skill walks a user through
 
 ## The three layers
 
-- **M** (Memory) — triggers and facts that *activate* this agent profile. Not a session log. A stimulus layer.
-- **I** (Intention) — what the agent is doing right now: goal, user purpose, success criteria. Rewritten per session.
-- **C** (Context) — persona, voice tone, temperature, why it exists. The behavioral configuration loaded after M fires.
+Two static layers (state), one dynamic (vector):
 
-Lifecycle: `M → C → I`. A trigger fires (M), the persona loads (C), the goal is pursued through it (I).
+- **M** (Memory, *static*) — triggers and facts that *activate* this agent profile. A stimulus layer, not a session log.
+- **C** (Context, *static*) — **who/where the agent IS**: persona, voice tone, temperature. The stable home position, independent of any task.
+- **I** (Intention, *dynamic*) — **where the agent is GOING**: long-arc `mission` (stable across sessions) + short-arc `goal`, `user_purpose`, `success_criteria` (rewritten per session).
+
+Lifecycle: `M → C → I`. A trigger fires (M), the persona loads (C), the vector is pursued through it (I).
+
+**Context = state. Intention = vector.** Never confuse the two. "Why does the agent exist?" is a `mission` (I), not a context field.
 
 ## When to use this skill
 
@@ -54,14 +58,16 @@ All file paths below are relative to the repo root.
 - `temperature` must be a number between 0.0 and 1.0.
 - `facts` are assertions ("I am a ___"), not descriptions.
 - `quick_recall` is a small set (max 5 items) of must-remember rules.
-- `success_criteria` must be observable — something you can check, not a feeling.
+- `mission` is the agent's long-arc reason for being — rarely changes.
+- `goal` is the current session's target — rewritten per task.
+- `success_criteria` apply to the `goal`, not the `mission`. Must be observable — something you can check, not a feeling.
 
 ## Self-reference
 
 This skill is itself M.I.C.-shaped:
 
-- The frontmatter `description` is the skill's **M** (what triggers it).
-- This document body is the skill's **C** (how to behave when running).
-- The onboarding outcome — three valid files — is the skill's **I** (the goal).
+- **M** — the frontmatter `description` is what triggers this skill.
+- **C** — this document body is the skill's static state (how it behaves).
+- **I** — the skill's `mission` is "produce valid M.I.C. profiles forever"; its `goal` per session is "produce one valid M.I.C. profile for the user in front of me."
 
 If you understand that recursion, you understand M.I.C.

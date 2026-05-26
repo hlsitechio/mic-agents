@@ -27,23 +27,23 @@ If you are an AI agent that just cloned this repo, do **exactly** this:
 
 A three-layer agent profile format. Open source. Fully transparent. Built to be remodeled.
 
-- **M** — Memory: triggers and facts that *activate* an agent
-- **I** — Intention: what the agent is doing *right now*
-- **C** — Context: persona, voice, and behavioral state
+- **M** — Memory (*static*): triggers and facts that *activate* an agent
+- **C** — Context (*static*): **who/where the agent IS** — persona, voice, temperature
+- **I** — Intention (*dynamic*): **where the agent is GOING** — long-arc mission + current goal
 
-The acronym reads `M.I.C.`. Runtime lifecycle reads `M → C → I`: a trigger fires (M), the persona loads (C), the goal is pursued through it (I).
+The acronym reads `M.I.C.`. Runtime lifecycle reads `M → C → I`: a trigger fires (M), the persona loads (C), the vector is pursued through it (I). **Two static layers, one dynamic.** Context = state. Intention = vector. Never confuse the two.
 
 ## Why three files?
 
 Each layer changes at a different rate.
 
-| Layer | Lifetime | When it changes |
+| Layer | Tense | When it changes |
 |---|---|---|
-| M | Permanent | Rarely. New trigger keywords, new identity facts. |
-| C | Per-agent | Whenever you redefine the persona. |
-| I | Per-session | Every task. Cheapest to rewrite. |
+| M | static | rarely — new triggers or identity facts |
+| C | static | rarely — when the persona itself is redefined |
+| I | dynamic | `mission` rarely; `goal`, `user_purpose`, `success_criteria` per session |
 
-Separate files make each layer hot-swappable.
+Separate files make each layer hot-swappable. Static layers stay put; the dynamic layer turns over per task.
 
 ## Repo layout
 

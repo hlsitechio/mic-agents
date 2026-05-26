@@ -1,24 +1,28 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "I — Intention Layer",
-  "description": "What the agent is doing right now: the goal, the user's purpose, and the success criteria. Rewritten per session.",
+  "title": "I — Intention Layer (dynamic)",
+  "description": "Dynamic vector: where the agent is going. Long-arc (mission, stable across sessions) and short-arc (goal, rewritten per session). Intention answers 'where am I going?' — never 'who am I?'.",
   "type": "object",
-  "required": ["goal", "user_purpose", "success_criteria"],
+  "required": ["mission", "goal", "user_purpose", "success_criteria"],
   "additionalProperties": false,
   "properties": {
+    "mission": {
+      "type": "string",
+      "description": "The stable, long-arc reason this agent exists. The north star. Rarely changes."
+    },
     "goal": {
       "type": "string",
-      "description": "The primary objective the agent is pursuing right now."
+      "description": "The current short-arc target this session. Rewritten per task."
     },
     "user_purpose": {
       "type": "string",
-      "description": "What the user actually wants — interpreted, not just literal."
+      "description": "What the user actually wants right now — interpreted, not just literal."
     },
     "success_criteria": {
       "type": "array",
       "items": { "type": "string" },
       "minItems": 1,
-      "description": "Observable conditions that indicate the goal has been met."
+      "description": "Observable conditions that indicate the current goal has been met."
     }
   }
 }

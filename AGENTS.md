@@ -6,11 +6,13 @@
 
 ## What this repo is
 
-**M.I.C.** — a three-layer JSON format for AI agent profiles.
+**M.I.C.** — a three-layer JSON format for AI agent profiles. Two static layers, one dynamic.
 
-- **M** (Memory) — triggers and facts that activate an agent
-- **I** (Intention) — what the agent does right now
-- **C** (Context) — persona, voice, temperature
+- **M** (Memory, *static*) — triggers and facts that *activate* an agent
+- **C** (Context, *static*) — **who/where the agent IS**: persona, voice, temperature
+- **I** (Intention, *dynamic*) — **where the agent is GOING**: long-arc mission + current goal
+
+Context = state. Intention = vector. Never confuse the two.
 
 ## Your job
 
@@ -43,7 +45,9 @@ Total reading time: under 60 seconds.
 - `temperature` is a number `0.0`–`1.0`. Not a string.
 - `facts` are assertions ("I am a ___"), not descriptions.
 - `quick_recall` is at most 5 items. Keep it small.
-- `success_criteria` must be observable. Not feelings.
+- `mission` is the long-arc reason the agent exists — rarely changes.
+- `goal` is the current session's target — rewritten per task.
+- `success_criteria` apply to the current `goal`, not the `mission`. Must be observable. Not feelings.
 
 ## When NOT to run onboarding
 
