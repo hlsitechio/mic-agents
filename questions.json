@@ -1,11 +1,11 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "flow": "strict_linear",
   "confirmation": "per_phase",
   "phases": [
     {
       "id": "M",
-      "title": "Memory — Who triggers you? (static)",
+      "title": "Memory - Who triggers you? (static)",
       "target_file": "M.json",
       "questions": [
         {
@@ -31,16 +31,16 @@
         },
         {
           "id": "quick_recall",
-          "prompt": "What 1-3 things must this agent ALWAYS remember? (the things that, if forgotten, the agent fails)",
+          "prompt": "What 1-5 things must this agent ALWAYS remember? (the things that, if forgotten, the agent fails)",
           "type": "array",
           "fills": "quick_recall",
-          "required": false
+          "required": true
         }
       ]
     },
     {
       "id": "C",
-      "title": "Context — Who are you? (static)",
+      "title": "Context - Who are you? (static)",
       "target_file": "C.json",
       "questions": [
         {
@@ -69,7 +69,7 @@
     },
     {
       "id": "I",
-      "title": "Intention — Where are you going? (dynamic)",
+      "title": "Intention - Where are you going? (dynamic)",
       "target_file": "I.json",
       "questions": [
         {
